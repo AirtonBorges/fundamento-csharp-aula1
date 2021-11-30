@@ -14,39 +14,50 @@ namespace dotnetcore
         static void Main(string[] args)
         {
             var pessoas = new List<Pessoa>();
-            pessoas.Add(new Pessoa("Adaleberto", 10));
-            pessoas.Add(new Pessoa("Cleitin Gameplays", 16));
-            pessoas.Add(new Pessoa("Sasuke Naruto", 19));
+            pessoas.Add(new Pessoa("Adaleberto", 34));
+            pessoas.Add(new Pessoa("Cleitin Gameplays", 18));
+            pessoas.Add(new Pessoa("Sasuke Naruto", 55));
+            pessoas.Add(new Pessoa("Cleitin Gameplays", 8));
+            pessoas.Add(new Pessoa("Boku no hero academia", 3));
+            pessoas.Add(new Pessoa("Roberto NooN", 82));
+            pessoas.Add(new Pessoa("Sasuke Naruto", 13));
             
+            var quantidadePessoasMaiorIdade = QuantidadePessoasMaioresDeIdade(pessoas);
+            var pessoaMaisVelha = PessoaMaisVelha(pessoas);
+            var pessoaMaisNova = PessoaMaisNova(pessoas);
+            var mediaIdades = CalcularMediaIdades(pessoas);
+
             Console.WriteLine("---- SENSO 2021 ----");
             Console.WriteLine("- Participantes: ");
-            foreach (var pessoa in  pessoas) {
+            foreach (var pessoa in  pessoas) 
+            {
                 Console.WriteLine($"> {pessoa.Nome}, Idade {pessoa.Idade}.");
             }
 
-            int quantidadePessoasMaiorIdade = QuantidadePessoasMaioresDeIdade(pessoas);
-            Pessoa pessoaMaisVelha = PessoaMaisVelha(pessoas);
-            Pessoa pessoaMaisNova = PessoaMaisNova(pessoas);
             Console.WriteLine("\n----- DADOS -----");
-            Console.WriteLine($"- Media de idade do grupo: {CalcularMediaIdades(pessoas)}");   
-            Console.WriteLine($"- Pessoa mais velha: {pessoaMaisVelha.Nome}, com {pessoaMaisVelha.Nome}");
-            Console.WriteLine($"- Pessoa mais velha: {pessoaMaisNova.Nome}, com {pessoaMaisNova.Idade}");
+            Console.WriteLine($"- Media de idade do grupo: {mediaIdades} anos");   
+            Console.WriteLine($"- Pessoa mais velha: {pessoaMaisVelha.Nome}, com {pessoaMaisVelha.Idade} anos");
+            Console.WriteLine($"- Pessoa mais nova: {pessoaMaisNova.Nome}, com {pessoaMaisNova.Idade} anos");
             Console.WriteLine($"- Quantidade de Pessoas Maiores de Idade: {quantidadePessoasMaiorIdade}\n");
         }
 
-        private static int CalcularMediaIdades(List<Pessoa> pPessoas) {
+        private static int CalcularMediaIdades(List<Pessoa> pPessoas) 
+        {
             return (int)pPessoas.Average(p => p.Idade);
         }
 
-        private static Pessoa PessoaMaisVelha(List<Pessoa> pPessoas) {
-            return pPessoas.OrderBy(p => p.Idade).First();
+        private static Pessoa PessoaMaisVelha(List<Pessoa> pPessoas) 
+        {
+            return pPessoas.OrderByDescending(p => p.Idade).First();
         }
 
-        private static Pessoa PessoaMaisNova(List<Pessoa> pPessoas) {
-            return pPessoas.OrderBy(p => p.Idade).Last();
+        private static Pessoa PessoaMaisNova(List<Pessoa> pPessoas) 
+        {
+            return pPessoas.OrderByDescending(p => p.Idade).Last();
         }
 
-        private static int QuantidadePessoasMaioresDeIdade(List<Pessoa> pPessoas) {
+        private static int QuantidadePessoasMaioresDeIdade(List<Pessoa> pPessoas) 
+        {
             return pPessoas.Where(p => p.Idade > MAIORIDADE).Count(); 
         }
     }
